@@ -49,12 +49,21 @@ export const useAuth = () => {
       try {
         await setItem('accessToken', newAuthState.accessToken);
         console.log('Token stored in Keychain successfully');
+        
+        // Store refreshToken if available
+        if (newAuthState.refreshToken) {
+          await setItem('refreshToken', newAuthState.refreshToken);
+          console.log('Refresh token stored in Keychain successfully');
+        }
       } catch (keychainError) {
         console.error('Failed to store token in Keychain:', keychainError);
         Alert.alert('Warning', 'Token received but could not be stored securely.');
       }
 
-      dispatch(setCredentials({ token: newAuthState.accessToken }));
+      dispatch(setCredentials({ 
+        token: newAuthState.accessToken,
+        refreshToken: newAuthState.refreshToken || undefined,
+      }));
       dispatch(logIn());
       console.log('Auth state updated in Redux');
 
@@ -98,18 +107,21 @@ export const useAuth = () => {
       }
 
       try {
-        const cleared = await removeItem('accessToken');
+        await removeItem('accessToken');
+        await removeItem('refreshToken');
         console.log('Keychain cleared');
 
         const verify = await getAccessToken();
         if (verify) {
           console.warn('Keychain still has data after reset, trying again...');
           await removeItem('accessToken');
+          await removeItem('refreshToken');
         }
       } catch (keychainError) {
         console.warn('Keychain clear error (continuing anyway):', keychainError);
         try {
           await removeItem('accessToken');
+          await removeItem('refreshToken');
         } catch (e) {
           console.error('Second keychain clear attempt failed:', e);
         }
@@ -122,6 +134,7 @@ export const useAuth = () => {
       dispatch(logOut());
       try {
         await removeItem('accessToken');
+        await removeItem('refreshToken');
       } catch (e) {
         console.error('Emergency keychain clear failed:', e);
       }
