@@ -240,46 +240,9 @@ If using HTTP (not HTTPS) for local FusionAuth:
 ### OAuth Flow with FusionAuth
 
 Here's the complete OAuth 2.0 Authorization Code Flow with PKCE:
+<img width="2042" height="1514" alt="mermaid-diagram-2026-01-08-123630" src="https://github.com/user-attachments/assets/5c5ca882-6ecd-4e8c-9c36-05bc9956c722" />
 
-```
-┌─────────────┐         ┌──────────────┐         ┌─────────────┐
-│   Your App  │         │  FusionAuth  │         │   Browser    │
-│  (React     │         │   Server      │         │  (Secure)    │
-│   Native)   │         │              │         │              │
-└──────┬──────┘         └──────┬───────┘         └──────┬───────┘
-       │                        │                        │
-       │ 1. authorize()        │                        │
-       │───────────────────────>│                        │
-       │                        │                        │
-       │ 2. Open Browser        │                        │
-       │─────────────────────────────────────────────────>│
-       │                        │                        │
-       │                        │ 3. User Logs In        │
-       │                        │<───────────────────────│
-       │                        │                        │
-       │                        │ 4. Authorization Code  │
-       │                        │───────────────────────>│
-       │                        │                        │
-       │ 5. Redirect with Code  │                        │
-       │<─────────────────────────────────────────────────│
-       │ fusionauth.demo://     │                        │
-       │ oauthredirect?code=... │                        │
-       │                        │                        │
-       │ 6. Exchange Code       │                        │
-       │    for Tokens          │                        │
-       │───────────────────────>│                        │
-       │                        │                        │
-       │ 7. Return Tokens       │                        │
-       │<───────────────────────│                        │
-       │ {                      │                        │
-       │   accessToken,         │                        │
-       │   refreshToken,        │                        │
-       │   idToken              │                        │
-       │ }                      │                        │
-       │                        │                        │
-       │ 8. Store in Keychain   │                        │
-       │                        │                        │
-```
+
 
 #### Step-by-Step Flow:
 
