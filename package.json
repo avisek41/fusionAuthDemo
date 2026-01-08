@@ -7,12 +7,15 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "start:reset": "react-native start --reset-cache",
     "test": "jest"
   },
   "dependencies": {
+    "@react-native/new-app-screen": "0.83.1",
     "react": "19.2.0",
     "react-native": "0.83.1",
-    "@react-native/new-app-screen": "0.83.1",
+    "react-native-app-auth": "^8.1.0",
+    "react-native-keychain": "^10.0.0",
     "react-native-safe-area-context": "^5.5.2"
   },
   "devDependencies": {
