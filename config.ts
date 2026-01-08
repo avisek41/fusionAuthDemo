@@ -26,7 +26,7 @@ export const configs: {fusionauth: AuthConfiguration} = {
     clientId: '31055b18-2156-4230-8a21-a91672319525',
     clientSecret: 'L-6Mrv3VkWJ-jd51XX5aFikVsiFtg5Uy-QuWFbxL2so',
     redirectUrl: 'fusionauth.demo:/oauthredirect',
-    scopes: ['openid', 'profile', 'email'],
+    scopes: ['openid', 'profile', 'email', 'offline_access'],
     dangerouslyAllowInsecureHttpRequests: true,
     // Force login prompt to always show login screen (not use cached session)
     additionalParameters: {
